@@ -1,0 +1,29 @@
+def row_reduce(mat):
+    rref = [] #출력할 결과값행렬 초기화
+    row_idx = list(range(len(mat))) #가로(행)의 갯수
+    col_idx = len(mat[0]) #세로(열)의 갯수
+    for c in range(col_idx):
+        rows_with_nonzero = [r for r in row_idx if mat[r][c] != 0] #각 열에서 처음으로 0이 아닌 행을 찾는다
+        if rows_with_nonzero: #그것을 찾으면
+            pivot = rows_with_nonzero[0] #pivot에 그 수를 넣고
+            row_idx.remove(pivot) #row_idx에서 그 수를 뺴고
+            rref.append(mat[pivot]) #rref에 그 행의 값을 넣는다. 이걸 row_idx가 다 사라질떄까지 반복
+            for r in rows_with_nonzero: 
+                if r is not pivot: #똑같은 열에서 0이 아닌 행이 2개 이상 발견되면
+                    multiplier = mat[r][c] / mat[pivot][c] #그 열에서 각 행의 값들을 나눠준뒤
+                    mat[r] = [a - multiplier*b for a, b in zip(mat[r], mat[pivot])] #그 값을 빼서 0으로 만든다(행사다리꼴로 만들어준다.)          
+    for r in row_idx:
+        rref.append(mat[r]) #행사다리꼴로 만들어준 값을 rref에 추가
+    return rref
+
+n = int(input())
+A = []
+
+for i in range(n):
+    number = list(map(int, input().split()))
+    A.append(number)
+    
+from pprint import pprint
+pprint(row_reduce(A))
+
+참고자료 : https://excelsior-cjh.tistory.com/139
