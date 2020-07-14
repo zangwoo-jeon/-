@@ -1,0 +1,24 @@
+def add(mat1, mat2):
+    row_idx = list(range(len(mat1)))
+    col_idx = len(mat1[0])
+    res_mat = []
+    mid_mat = []
+    for r in row_idx:
+        result = [mat1[r][c]+mat2[r][c] for c in range(col_idx)]
+        mid_mat.append(result)
+        res_mat.append(mid_mat[r])
+    return res_mat
+
+n = int(input("행의 갯수를 입력하세요 : \n"))
+A = []
+B = []
+
+for i in range(n):
+    number1 = list(map(int, input("첫번째 행렬의 원소를 입력하세요 : \n").split()))
+    A.append(number1)
+for j in range(n):
+    number2 = list(map(int, input("두번째 행렬의 원소를 입력하세요 : \n").split()))
+    B.append(number2)
+    
+from pprint import pprint
+pprint(add(A,B))
