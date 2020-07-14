@@ -1,14 +1,14 @@
 def add(mat):
     row_idx = list(range(len(mat)))
     col_idx = len(mat[0])
-    mul_mat = []
+    add_mat = []
     mid_mat = []
     add_value = int(input("더할 수를 입력하세요 :"))
     for r in row_idx:
         result = [add_value+mat[r][c] for c in range(col_idx)]
         mid_mat.append(result)
-        mul_mat.append(mid_mat[r])
-    return mul_mat
+        add_mat.append(mid_mat[r])
+    return add_mat
 
 n = int(input("행의 갯수를 입력하세요 : \n"))
 A = []
