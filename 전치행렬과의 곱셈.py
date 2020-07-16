@@ -3,17 +3,7 @@ def mul(mat1, mat2):
     row_idx2 = list(range(len(mat2)))
     col_idx1 = len(mat1[0])
     col_idx2 = len(mat2[0])
-    row2_length = len(mat2)
-    res_mat = []
-    
-    try:
-        if (row2_length != col_idx1):
-                raise ValueError("첫번째 행렬의 열과 두번째 행렬의 행의 수가 같지 않습니다.")
-    except ValueError:
-        a = print("첫번째 행렬의 열과 두번째 행렬의 행의 수를 맞춰주세요.")
-        return a
-            
-        
+    res_mat = []        
     for r in row_idx1:
         mid_mat = []
         for c2 in range(col_idx2):
