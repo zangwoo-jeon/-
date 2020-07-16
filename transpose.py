@@ -2,8 +2,8 @@ def transpose(mat):
     row_idx = list(range(len(mat)))
     col_idx = len(mat[0])
     trans_mat = []
-    for r in row_idx:
-        result = [mat[c][r] for c in range(col_idx)]
+    for c in range(col_idx):
+        result = [mat[r][c] for r in row_idx]
         trans_mat.append(result)
     print("이 행렬의 전치 행렬은 \n")
     return trans_mat
