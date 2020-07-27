@@ -1,5 +1,4 @@
 def det(mat):
-    row_idx = list(range(len(mat)))
     col_idx = len(mat[0])
     result = 0
     for c in range(col_idx):
