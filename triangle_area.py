@@ -40,9 +40,9 @@ def cross_product(mat1, mat2):
 
         Cross = ((cross_mat[1][one_r]*cross_mat[2][two_r]) - (cross_mat[1][two_r]*cross_mat[2][one_r]))  
         Middle_mat.append(Cross)
-        print("Middle_mat", Middle_mat)
         result = Middle_mat[1]
         result_mat.append(result)
+    print(result_mat)
     return result_mat
     
 P = list(map(int, input("첫 번째 꼭지점의 원소를 입력하세요.\n").split()))
