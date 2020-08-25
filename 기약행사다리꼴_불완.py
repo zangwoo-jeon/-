@@ -41,14 +41,26 @@ def row_reduce(mat):
 def reduced_row(mat):
     Mat = row_reduce(pivoting(mat)) # Mat = rref
     reduced_mat = []
-    row_idx = (len(mat)) #가로(행)의 갯수
-    col_idx = len(mat[0]) #세로(열)의 갯수
-    rrow_idx = row_idx - 1
-    reduced_mat.append(Mat[-1])
-    for r in range(rrow_idx):
-        Minus = Mat[-1-r]*Mat[-2-r][-2-r]
-        result = Mat[-2-r] + Minus
-        reduced_mat.append(result)
+    row_idx = list(range((len(Mat)))) #가로(행)의 갯수
+    col_idx = len(Mat[0]) #세로(열)의 갯수
+    rrow_idx = list(range((len(Mat)-1)))
+    for c in range(col_idx-1):
+        rows_with_nonzero = [r for r in rrow_idx if Mat[-2-r][-1-c] != 0]
+        print("c", c)
+        print("nonzero", rows_with_nonzero)
+        if rows_with_nonzero:
+            pivot = rows_with_nonzero[0]
+            for r in rows_with_nonzero:
+                if r is not pivot:
+                    multiplier = Mat[pivot][c+1] / Mat[r][c+1]
+                    print("multi", multiplier)
+                    Mat[pivot] = [a - multiplier*b for a, b in zip(Mat[pivot], Mat[r])]
+            rrow_idx.remove(pivot)
+            row_idx.remove(pivot)
+            reduced_mat.append(Mat[pivot])
+    for r in row_idx:
+        reduced_mat.append(Mat[r])
+        
     return reduced_mat
     
 n = int(input("행의 갯수를 입력하세요\n"))
