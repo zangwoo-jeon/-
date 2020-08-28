@@ -42,11 +42,12 @@ def reduced_row(mat):
     Mat = row_reduce(pivoting(mat)) # Mat = rref
     print("Mat", Mat)
     reduced_mat = []
+    Erow_idx = len(Mat)
     row_idx = list(range((len(Mat)))) #가로(행)의 갯수
     col_idx = len(Mat[0]) #세로(열)의 갯수
     rrow_idx = list(range((len(Mat)-1)))
     for c in range(col_idx-1):
-        if Mat[-1][-c] == 0:
+        if Mat[-1][-1] == 0 and Mat[-1][-2] == 0:
             rows_with_nonzero = [r for r in rrow_idx if Mat[-2-r][-1-c] != 0]
             print("c", c)
             print("nonzero", rows_with_nonzero)
@@ -61,21 +62,25 @@ def reduced_row(mat):
                 row_idx.remove(pivot)
                 reduced_mat.append(Mat[pivot])
         else:
-            rows_with_nonzero = [r for r in row_idx if Mat[-1-r][-1-c] != 0]
+            rows_with_nonzero = [r for r in row_idx if Mat[r][-2-c] != 0]
             print("c", c)
             print("nonzero", rows_with_nonzero)
             if rows_with_nonzero:
-                pivot = rows_with_nonzero[0]
+                pivot = rows_with_nonzero[-1]
                 for r in rows_with_nonzero:
                     if r is not pivot:
-                        multiplier = Mat[-pivot][c+1] / Mat[-r][c+1]
+                        print("Mat[pivot]", Mat[pivot])
+                        multiplier = Mat[r][-2-c] / Mat[pivot][-2-c]
                         print("multi", multiplier)
-                        Mat[pivot] = [a - multiplier*b for a, b in zip(Mat[pivot], Mat[r])]
-                rrow_idx.remove(pivot)
-                row_idx.remove(pivot)
+                        Mat[r] = [a - multiplier*b for a, b in zip(Mat[r], Mat[pivot])]
+                        print("Mat[r]", Mat[r])
                 reduced_mat.append(Mat[pivot])
+                print("RI", row_idx)
+                row_idx.remove(pivot)
+                        
     for r in row_idx:
-        reduced_mat.append(Mat[r])     
+        reduced_mat.append(Mat[r])
+    reduced_mat.reverse()
     return reduced_mat
     
 n = int(input("행의 갯수를 입력하세요\n"))
